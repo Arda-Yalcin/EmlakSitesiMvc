@@ -32,7 +32,35 @@ namespace EmlakSitesi.Controllers
         [HttpPost]
         public IActionResult Create(Ilan ilan,IFormFile Foto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if(Foto != null)
+                {
+                    var uzanti=Path.GetExtension(Foto.FileName);
+                    var yeniAd=Guid.NewGuid+uzanti;
+                    var yol=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot\\images",yeniAd);
+                    if (Foto.ContentType == "image/png" || Foto.ContentType == "image/jpg" || Foto.ContentType == "image/jpeg")
+                    {
+                        using(var stream=new FileStream(yol, FileMode.Create))
+                        {
+                            try
+                            {
+                                Foto.CopyTo(stream);
+                                ilan.Foto=yeniAd;
+                                _ilan.Ilanlar.Add(ilan);
+                                _ilan.SaveChanges();
+                                return RedirectToAction("Index","Ilan");
+                            }
+                            catch(System.Exception)
+                            {
+                                throw;
+                            }
+                        }
+                    }else ViewBag.Error="Hatalı Dosya Formatı";
+                }else ViewBag.Error="Önce Foto Yükle";
+            }
+            return View(ilan);
+            
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

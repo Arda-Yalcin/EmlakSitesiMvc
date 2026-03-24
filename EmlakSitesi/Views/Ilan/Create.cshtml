@@ -4,6 +4,9 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+@if(ViewBag.Error!=null){
+    <span class="text-danger">@ViewBag.Error</span>
+}
 
 <div>
     <form asp-action="Create" asp-controller="Ilan" method="post" enctype="multipart/form-data">
