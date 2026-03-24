@@ -1,0 +1,39 @@
+@model EmlakSitesi.Models.Ilan
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form asp-action="Create" asp-controller="Ilan" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Baslik" class="form-label"></label>
+            <input asp-for="Baslik" class="form-control">
+            <span asp-validation-for="Baslik" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Aciklama" class="form-label"></label>
+            <input asp-for="Aciklama" class="form-control">
+            <span asp-validation-for="Aciklama" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Tur" class="form-label"></label>
+            <input asp-for="Tur" class="form-control">
+            <span asp-validation-for="Tur" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Fiyat" class="form-label"></label>
+            <input  asp-for="Fiyat" class="form-control">
+            <span asp-validation-for="Fiyat" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Foto" class="form-label"></label>
+            <input type="file" asp-for="Foto" class="form-control">
+            <span asp-validation-for="Foto" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Kaydet" class="btn btn-primary">
+        </div>
+    </form>
+</div>
